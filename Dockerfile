@@ -1,0 +1,7 @@
+FROM alpine
+
+WORKDIR /x
+WORKDIR /y
+WORKDIR z
+
+CMD pwd

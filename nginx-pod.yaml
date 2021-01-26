@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: nginx
+   labels:
+      app: nginx
+spec:
+   containers:
+   - name: nginx
+     image: nginx:1.19.1
+     ports:
+       - containerPort: 80
+     volumeMounts:
+       - name: config-volume
+         mountPath: /etc/nginx
+       - name: httpasswd-volume
+         mountPath: /etc/nginx/conf
+      
+   volumes:
+      - name: config-volume
+        configMap:
+          name: nginx-config
+      - name: httpasswd-volume
+        secret:
+          secretName: nginx-htpasswd

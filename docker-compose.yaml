@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  base-price:
+    image: linuxacademycontent/prices-base-price:1
+    networks:
+      - prices-overlay-net
+    deploy:
+      replicas: 3
+  sales:
+    image: linuxacademycontent/prices-sales:1
+    networks:
+      - prices-overlay-net
+    deploy:
+      replicas: 3
+  total-price:
+    image: linuxacademycontent/prices-total-price:1
+    networks:
+      - prices-overlay-net
+    deploy:
+      replicas: 2
+    ports:
+      - "8080:80"
+
+networks:
+  prices-overlay-net:
+    driver: overlay
